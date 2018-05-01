@@ -47,3 +47,30 @@ def histogram(data, bins, cumulative=False, x_label='', y_label='', title='', co
     ax.set_ylabel(y_label)
 
     plt.show()
+
+
+def overlaid_histogram(data1, data2, bins=0, data1_name='', data1_color='r', data2_name='', data2_color='g', x_label='', y_label='', title='', yscale_log=False):
+    # overlaid two histograms to compare them
+
+    # set the bounds for the bins so that the two distributions are fairly compared
+    max_nbins = 20
+    data_range = [min(min(data1), min(data2)), max(max(data1), max(data2))]
+    bin_width = (data_range[1] - data_range[0]) / max_nbins
+
+    if bins == 0:
+        # set up the bin list
+        bins = np.arange(data_range[0], data_range[1] + bin_width, bin_width)
+    
+    _, ax = plt.subplots()
+    ax.hist(data1, bins, color=data1_color, alpha=1, label=data1_name)
+    ax.hist(data2, bins, color=data2_color, alpha=0.75, label=data2_name)
+    # labels and title
+    ax.set_title(title)
+    ax.set_xlabel(x_label)
+    ax.set_ylabel(y_label)
+    ax.legend()
+
+    plt.show()
+
+
+def barplot
