@@ -135,3 +135,23 @@ def stack_barplot(x_data, y_data_list, colors, y_data_names=[], x_label='', y_la
     ax.legend()
 
     plt.show()
+
+
+def boxplot(x_data, y_data, base_color='#539caf', median_color='#297083', x_label='', y_label='', title=''):
+    _, ax = plt.subplots()
+    #draw boxplots, specify the desired style
+    ax.boxplot(y_data,
+        # patch_artist must be true to control box fill
+        patch_artist=True,
+        medianprops={'color':median_color},
+        boxprops={'color':base_color, 'facecolor':base_color},
+        whiskerprops={'color':base_color},
+        capprops={'color':base_color})
+
+    # by default, the tick label starts at 1 and increments by 1 for each  box drawn
+    ax.set_xticklabels(x_data)    
+    ax.set_title(title)
+    ax.set_xlabel(x_label)
+    ax.set_ylabel(y_label)
+    
+    plt.show()

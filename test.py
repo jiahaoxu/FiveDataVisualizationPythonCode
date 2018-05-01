@@ -24,4 +24,5 @@ colors5 = ['r', 'g']
 # overlaid_histogram(6 * x_data1 - 3, x_data3)
 # barplot(x_data4, y_data4, y_err4, x_label='', y_label='', title='')
 # group_barplot(x_data5, y_data5, colors5, y_err5, y_data_names=['r', 'b'])
-stack_barplot(x_data5, y_data5, colors5, y_data_names=['r', 'b'])
+# stack_barplot(x_data5, y_data5, colors5, y_data_names=['r', 'b'])
+boxplot(x_data5, y_data5)
