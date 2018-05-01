@@ -81,10 +81,39 @@ def barplot(x_data, y_data, error_data, x_label='', y_label='', title=''):
     # draw error bars (could be standard deviation)
 
     ax.errorbar(x, y_data, yerr=error_data, color='black', ls='none', lw=2, capthick=2)
-    ax.set_xticks(x, x_data)
+    plt.xticks(x, x_data)
 
     ax.set_title(title)
     ax.set_xlabel(x_label)
     ax.set_ylabel(y_label)
+
+    plt.show()
+
+
+def group_barplot(x_data, y_data_list, colors, error_data=[], y_data_names=[], x_label='', y_label='', title=''):
+    _, ax = plt.subplots()
+    # total width for all bars at one x location
+    totol_width = 0.8
+    # width of each individual bar
+    ind_width = totol_width / len(y_data_list)
+    # center each group of bars about the x tick mark
+    alteration = np.arange(-totol_width/2 + ind_width/2, totol_width/2, ind_width)
+
+    print alteration
+
+    x = range(len(x_data))
+    # draw bars, one category at a time
+    for i in range(len(y_data_list)):
+        # move the bar to the right on the x-axis so that it won't
+        # overlap with previous drawn ones
+        ax.bar(x + alteration[i], y_data_list[i], color=colors[i], label=y_data_names[i], width=ind_width)
+        if len(error_data) != 0:
+            ax.errorbar(x + alteration[i], y_data_list[i], yerr=error_data[i], color='black', ls='none', lw=2, capthick=2)
+    
+    plt.xticks(x, x_data)
+    ax.set_title(title)
+    ax.set_xlabel(x_label)
+    ax.set_ylabel(y_label)
+    ax.legend()
 
     plt.show()
