@@ -99,8 +99,6 @@ def group_barplot(x_data, y_data_list, colors, error_data=[], y_data_names=[], x
     # center each group of bars about the x tick mark
     alteration = np.arange(-totol_width/2 + ind_width/2, totol_width/2, ind_width)
 
-    print alteration
-
     x = range(len(x_data))
     # draw bars, one category at a time
     for i in range(len(y_data_list)):
@@ -110,6 +108,26 @@ def group_barplot(x_data, y_data_list, colors, error_data=[], y_data_names=[], x
         if len(error_data) != 0:
             ax.errorbar(x + alteration[i], y_data_list[i], yerr=error_data[i], color='black', ls='none', lw=2, capthick=2)
     
+    plt.xticks(x, x_data)
+    ax.set_title(title)
+    ax.set_xlabel(x_label)
+    ax.set_ylabel(y_label)
+    ax.legend()
+
+    plt.show()
+
+def stack_barplot(x_data, y_data_list, colors, y_data_names=[], x_label='', y_label='', title=''):
+    _, ax = plt.subplots()
+    x = range(len(x_data))
+    # draw bars, one category at a time
+    for i in range(len(y_data_list)):
+        if i == 0:
+            ax.bar(x, y_data_list[i], color=colors[i], align='center', label=y_data_names[i])
+        else:
+            # for each category after the first one, the bottom of the
+            # bar will be the top of the previous category
+            ax.bar(x, y_data_list[i], color=colors[i], bottom=y_data_list[i - 1], align='center', label=y_data_names[i])            
+
     plt.xticks(x, x_data)
     ax.set_title(title)
     ax.set_xlabel(x_label)
