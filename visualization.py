@@ -73,4 +73,18 @@ def overlaid_histogram(data1, data2, bins=0, data1_name='', data1_color='r', dat
     plt.show()
 
 
-def barplot
+def barplot(x_data, y_data, error_data, x_label='', y_label='', title=''):
+    _, ax = plt.subplots()
+    # draw bars, position them in the center of the tick mark on the x-axis
+    x = range(len(x_data))
+    ax.bar(x, y_data, color='r', align='center')
+    # draw error bars (could be standard deviation)
+
+    ax.errorbar(x, y_data, yerr=error_data, color='black', ls='none', lw=2, capthick=2)
+    ax.set_xticks(x, x_data)
+
+    ax.set_title(title)
+    ax.set_xlabel(x_label)
+    ax.set_ylabel(y_label)
+
+    plt.show()
